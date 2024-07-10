@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Form,
   FormControl,
@@ -20,7 +20,7 @@ const EditUserProfileSchema = z.object({
   name: z.string().min(1, "Required"),
 });
 
-const ProfileForm = () => {
+const ProfileForm = ({ user, onUpdate }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm({
@@ -32,9 +32,22 @@ const ProfileForm = () => {
     },
   });
 
+  const handleSubmit = async (values) => {
+    setIsLoading(true);
+    await onUpdate(values.name);
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    form.reset({ name: user.name, email: user.email });
+  }, [user]);
+
   return (
     <Form {...form}>
-      <form className="flex flex-col gap-6">
+      <form
+        className="flex flex-col gap-6"
+        onSubmit={form.handleSubmit(handleSubmit)}
+      >
         <FormField
           disabled={isLoading}
           control={form.control}
