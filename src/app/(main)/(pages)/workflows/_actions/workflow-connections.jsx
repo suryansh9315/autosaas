@@ -1,9 +1,9 @@
 "use server";
 import { db } from "@/lib/db";
-import { useAuth, currentUser } from "@clerk/nextjs";
+import { auth, currentUser } from "@clerk/nextjs/server";
 
 export const getGoogleListener = async () => {
-  const { userId } = useAuth();
+  const { userId } = auth();
 
   if (userId) {
     const listener = await db.user.findUnique({

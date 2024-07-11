@@ -1,32 +1,24 @@
-import React from 'react'
-import Workflow from './Workflow'
+import React from "react";
+import Workflow from "./Workflow";
+import { onGetWorkflows } from "../_actions/workflow-connections";
 
-const Workflows = () => {
+const Workflows = async () => {
+  const workflows = await onGetWorkflows();
+
   return (
     <div className="relative flex flex-col gap-4">
       <section className="flex flex-col m-2">
-      <Workflow
-        description="Creating a test Workflow" 
-        id="jns2713bh421hb" 
-        name="Automatic Workflow" 
-        publish={false}
-      />
-        {/* <MoreCredits />
+        {/* <MoreCredits /> */}
         {workflows?.length ? (
-          workflows.map((flow) => (
-            <Workflow
-              key={flow.id}
-              {...flow}
-            />
-          ))
+          workflows.map((flow) => <Workflow key={flow.id} {...flow} />)
         ) : (
           <div className="mt-28 flex text-muted-foreground items-center justify-center">
             No Workflows
           </div>
-        )} */}
+        )}
       </section>
     </div>
-  )
-}
+  );
+};
 
-export default Workflows
+export default Workflows;
