@@ -12,6 +12,7 @@ import { onContentChange } from "@/lib/editor-utils";
 import ActionButton from "./ActionButton";
 import GoogleFiles from "./GoogleFiles";
 import GoogleDrive from "./GoogleDrive";
+import axios from "axios";
 
 const nodeMapper = {
   Notion: "notionNode",
