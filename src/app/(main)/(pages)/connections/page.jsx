@@ -109,9 +109,9 @@ const ConnectionsPage = async (props) => {
         <section className="flex flex-col gap-4 p-6 text-muted-foreground">
           Connect all your apps directly from here. You may need to connect
           these apps regularly to refresh verification
-          {CONNECTIONS.map((connection) => {
+          {CONNECTIONS.map((connection, index) => {
             return (
-              <Card className="flex w-full items-center justify-between">
+              <Card className="flex w-full items-center justify-between" key={index}>
                 <CardHeader className="flex flex-col gap-4">
                   <div className="flex flex-row gap-2">
                     <Image

@@ -23,6 +23,7 @@ import FlowInstance from "./FlowInstance";
 import EditorCanvasSidebar from "./EditorCanvasSidebar";
 import { v4 } from "uuid";
 import EditorCanvasCard from "./EditorCanvasCard";
+import { onGetNodesEdges } from "../../../_actions/workflow-connections";
 
 const initialNodes = [];
 const initialEdges = [];
@@ -116,8 +117,8 @@ const EditorCanvas = () => {
   };
 
   useEffect(() => {
-    dispatch({ type: 'LOAD_DATA', payload: { edges, elements: nodes } })
-  }, [nodes, edges])
+    dispatch({ type: "LOAD_DATA", payload: { edges, elements: nodes } });
+  }, [nodes, edges]);
 
   const nodeTypes = useMemo(
     () => ({
@@ -127,15 +128,30 @@ const EditorCanvas = () => {
       Condition: EditorCanvasCard,
       AI: EditorCanvasCard,
       Slack: EditorCanvasCard,
-      'Google Drive': EditorCanvasCard,
+      "Google Drive": EditorCanvasCard,
       Notion: EditorCanvasCard,
       Discord: EditorCanvasCard,
-      'Custom Webhook': EditorCanvasCard,
-      'Google Calendar': EditorCanvasCard,
+      "Custom Webhook": EditorCanvasCard,
+      "Google Calendar": EditorCanvasCard,
       Wait: EditorCanvasCard,
     }),
     []
-  )
+  );
+
+  const onGetWorkFlow = async () => {
+    setIsWorkFlowLoading(true);
+    const response = await onGetNodesEdges(pathname.split("/").pop());
+    if (response) {
+      setEdges(JSON.parse(response.edges));
+      setNodes(JSON.parse(response.nodes));
+      setIsWorkFlowLoading(false);
+    }
+    setIsWorkFlowLoading(false);
+  };
+
+  useEffect(() => {
+    onGetWorkFlow();
+  }, []);
 
   return (
     <ResizablePanelGroup direction="horizontal">
