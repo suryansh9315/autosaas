@@ -29,6 +29,24 @@ const FlowInstance = ({ children, edges, nodes }) => {
     if (response) toast.message(response);
   }, []);
 
+  const onAutomateFlow = async () => {
+    const flows = [];
+    const connectedEdges = edges.map((edge) => edge.target);
+    connectedEdges.map((target) => {
+      nodes.map((node) => {
+        if (node.id === target) {
+          flows.push(node.type);
+        }
+      });
+    });
+
+    setIsFlow(flows);
+  };
+
+  useEffect(() => {
+    onAutomateFlow();
+  }, [edges]);
+
   return (
     <div className="flex flex-col gap-2">
       <div className="flex gap-3 p-4">

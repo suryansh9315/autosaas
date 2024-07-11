@@ -9,17 +9,16 @@ import Link from "next/link";
 import Image from "next/image";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-// import { toast } from 'sonner'
-// import { onFlowPublish } from '../_actions/workflow-connections'
+import { toast } from 'sonner'
+import { onFlowPublish } from "../_actions/workflow-connections";
 
 const Workflow = ({ description, id, name, publish }) => {
-    
   const onPublishFlow = async (event) => {
-    // const response = await onFlowPublish(
-    //   id,
-    //   event.target.ariaChecked === "false"
-    // );
-    // if (response) toast.message(response);
+    const response = await onFlowPublish(
+      id,
+      event.target.ariaChecked === "false"
+    );
+    if (response) toast.message(response);
   };
 
   return (
@@ -61,7 +60,7 @@ const Workflow = ({ description, id, name, publish }) => {
         </Label>
         <Switch
           id="airplane-mode"
-          // onClick={onPublishFlow}
+          onClick={onPublishFlow}
           defaultChecked={publish}
         />
       </div>

@@ -1,3 +1,4 @@
+'use client'
 import { useNodeConnections } from "@/providers/connections-provider";
 import { useEditor } from "@/providers/editor-provider";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -19,16 +20,33 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import {
-  //   fetchBotSlackChannels,
-  //   onConnections,
+  fetchBotSlackChannels,
+  onConnections,
   onDragStart,
 } from "@/lib/editor-utils";
 import RenderConnectionAccordion from "./RenderConnectionAccordion";
 import RenderOutputAccordion from "./RenderOutputAccordion";
+import { useFuzzieStore } from "@/store";
 
 const EditorCanvasSidebar = ({ nodes }) => {
   const { state } = useEditor();
   const { nodeConnection } = useNodeConnections();
+  const { googleFile, setSlackChannels } = useFuzzieStore();
+
+  useEffect(() => {
+    if (state) {
+      onConnections(nodeConnection, state, googleFile);
+    }
+  }, [state]);
+
+  useEffect(() => {
+    if (nodeConnection.slackNode.slackAccessToken) {
+      fetchBotSlackChannels(
+        nodeConnection.slackNode.slackAccessToken,
+        setSlackChannels
+      );
+    }
+  }, [nodeConnection]);
 
   return (
     <aside>

@@ -1,23 +1,22 @@
-// import { useFuzzieStore } from "@/store";
+import { useFuzzieStore } from "@/store";
 import React from "react";
-import ContentBasedOntitle from "./ContentBasedOnTitle";
+import ContentBasedOnTitle from "./ContentBasedOnTitle";
 
 const RenderOutputAccordion = ({ state, nodeConnection }) => {
-//   const {
-//     googleFile,
-//     setGoogleFile,
-//     selectedSlackChannels,
-//     setSelectedSlackChannels,
-//   } = useFuzzieStore();
-
+  const {
+    googleFile,
+    setGoogleFile,
+    selectedSlackChannels,
+    setSelectedSlackChannels,
+  } = useFuzzieStore();
   return (
-    <ContentBasedOntitle
-      // nodeConnection={nodeConnection}
-      // newState={state}
-      // file={googleFile}
-      // setFile={setGoogleFile}
-      // selectedSlackChannels={selectedSlackChannels}
-      // setSelectedSlackChannels={setSelectedSlackChannels}
+    <ContentBasedOnTitle
+      nodeConnection={nodeConnection}
+      newState={state}
+      file={googleFile}
+      setFile={setGoogleFile}
+      selectedSlackChannels={selectedSlackChannels}
+      setSelectedSlackChannels={setSelectedSlackChannels}
     />
   );
 };
