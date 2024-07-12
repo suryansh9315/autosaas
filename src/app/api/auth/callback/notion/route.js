@@ -35,6 +35,7 @@ export async function GET(req) {
           timestamp: "last_edited_time",
         },
       });
+      console.log(databasesPages)
       const databaseId = databasesPages?.results?.length
         ? databasesPages.results[0].id
         : "";
