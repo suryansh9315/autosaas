@@ -14,7 +14,7 @@ export async function POST(req) {
       channelResourceId = value;
     }
   });
-
+  console.log(channelResourceId);
   if (channelResourceId) {
     const user = await db.user.findFirst({
       where: {
@@ -22,15 +22,17 @@ export async function POST(req) {
       },
       select: { clerkId: true, credits: true },
     });
+    console.log(user);
     if ((user && parseInt(user.credits) > 0) || user?.credits == "Unlimited") {
       const workflow = await db.workflows.findMany({
         where: {
           userId: user.clerkId,
         },
       });
+      console.log(workflow);
       if (workflow) {
         workflow.map(async (flow) => {
-          console.log(flow)
+          console.log(flow);
           const flowPath = JSON.parse(flow.flowPath);
           let current = 0;
           while (current < flowPath?.length) {
