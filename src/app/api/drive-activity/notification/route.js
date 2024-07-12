@@ -32,7 +32,6 @@ export async function POST(req) {
       console.log(workflow);
       if (workflow) {
         workflow.map(async (flow) => {
-          console.log(flow);
           const flowPath = JSON.parse(flow.flowPath);
           let current = 0;
           while (current < flowPath?.length) {
@@ -45,6 +44,7 @@ export async function POST(req) {
                   url: true,
                 },
               });
+              console.log(discordMessage)
               if (discordMessage) {
                 await postContentToWebHook(
                   flow.discordTemplate,
