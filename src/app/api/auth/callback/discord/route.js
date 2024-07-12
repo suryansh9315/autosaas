@@ -11,7 +11,7 @@ export async function GET(req) {
     data.append("grant_type", "authorization_code");
     data.append(
       "redirect_uri",
-      "https://localhost:3000/api/auth/callback/discord"
+      "https://autosaas-sdl6.vercel.app/api/auth/callback/discord"
     );
     data.append("code", code.toString());
     const output = await axios.post(
@@ -37,9 +37,9 @@ export async function GET(req) {
         (guild) => guild.id == output.data.webhook.guild_id
       );
       return NextResponse.redirect(
-        `https://localhost:3000/connections?webhook_id=${output.data.webhook.id}&webhook_url=${output.data.webhook.url}&webhook_name=${output.data.webhook.name}&guild_id=${output.data.webhook.guild_id}&guild_name=${UserGuild[0].name}&channel_id=${output.data.webhook.channel_id}`
+        `https://autosaas-sdl6.vercel.app/connections?webhook_id=${output.data.webhook.id}&webhook_url=${output.data.webhook.url}&webhook_name=${output.data.webhook.name}&guild_id=${output.data.webhook.guild_id}&guild_name=${UserGuild[0].name}&channel_id=${output.data.webhook.channel_id}`
       );
     }
-    return NextResponse.redirect("https://localhost:3000/connections");
+    return NextResponse.redirect("https://autosaas-sdl6.vercel.app/connections");
   }
 }

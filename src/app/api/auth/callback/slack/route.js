@@ -31,7 +31,7 @@ export async function GET(req) {
       const teamId = data?.team?.id;
       const teamName = data?.team?.name;
       return NextResponse.redirect(
-        `https://localhost:3000/connections?app_id=${appId}&authed_user_id=${userId}&authed_user_token=${userToken}&slack_access_token=${accessToken}&bot_user_id=${botUserId}&team_id=${teamId}&team_name=${teamName}`
+        `https://autosaas-sdl6.vercel.app/connections?app_id=${appId}&authed_user_id=${userId}&authed_user_token=${userToken}&slack_access_token=${accessToken}&bot_user_id=${botUserId}&team_id=${teamId}&team_name=${teamName}`
       );
     }
   } catch (error) {
