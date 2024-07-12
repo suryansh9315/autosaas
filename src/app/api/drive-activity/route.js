@@ -18,7 +18,8 @@ export async function GET() {
     userId,
     "oauth_google"
   );
-  const accessToken = clerkResponse[0].token;
+  console.log(clerkResponse)
+  const accessToken = clerkResponse.data[0].token;
   oauth2Client.setCredentials({
     access_token: accessToken,
   });

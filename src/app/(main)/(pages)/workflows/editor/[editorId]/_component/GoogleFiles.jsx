@@ -10,7 +10,6 @@ const GoogleFiles = ({ gFile, nodeConnection, title }) => {
   if (!isGoogleFileNotEmpty(gFile)) {
     return null;
   }
-
   const details = ["kind", "name", "mimeType"];
   if (title === "Google Drive") {
     details.push("id");

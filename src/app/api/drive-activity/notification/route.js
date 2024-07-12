@@ -30,9 +30,10 @@ export async function POST(req) {
       });
       if (workflow) {
         workflow.map(async (flow) => {
+          console.log(flow)
           const flowPath = JSON.parse(flow.flowPath);
           let current = 0;
-          while (current < flowPath.length) {
+          while (current < flowPath?.length) {
             if (flowPath[current] == "Discord") {
               const discordMessage = await db.discordWebhook.findFirst({
                 where: {

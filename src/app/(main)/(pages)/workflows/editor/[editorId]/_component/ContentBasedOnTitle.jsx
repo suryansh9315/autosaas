@@ -13,6 +13,7 @@ import ActionButton from "./ActionButton";
 import GoogleFiles from "./GoogleFiles";
 import GoogleDrive from "./GoogleDrive";
 import axios from "axios";
+import { toast } from "sonner";
 
 const nodeMapper = {
   Notion: "notionNode",
@@ -36,7 +37,6 @@ const ContentBasedOnTitle = ({
     const reqGoogle = async () => {
       const response = await axios.get("/api/drive");
       if (response) {
-        console.log(response.data.message.files[0]);
         toast.message("Fetched File");
         setFile(response.data.message.files[0]);
       } else {
